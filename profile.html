@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Pulse - โปรไฟล์</title>
+  <link rel="stylesheet" href="common.css" />
+  <style>
+    :root {
+      --shadow-grey: #161925;
+      --twilight-indigo: #23395B;
+      --rich-cerulean: #406E8E;
+      --celadon: #BBDFC5;
+      --deep-pink: #FF579F;
+      --white: #FFFFFF;
+      --ink: #13202b;
+      --muted: #5e6b76;
+      --line: #dbe4ea;
+      --soft: #f6f9fb;
+      --radius: 22px;
+      --shadow: 0 18px 40px rgba(22, 25, 37, 0.08);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    .app {
+      min-height: 100vh;
+      padding: 18px 16px 96px;
+      background:
+        radial-gradient(circle at top right, rgba(65, 110, 142, 0.08), transparent 28%),
+        radial-gradient(circle at left 15%, rgba(187, 223, 197, 0.18), transparent 26%),
+        var(--white);
+    }
+    .container { width: min(1120px, 100%); margin: 0 auto; }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      color: var(--shadow-grey);
+      letter-spacing: -0.02em;
+    }
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--twilight-indigo), var(--rich-cerulean));
+      box-shadow: var(--shadow);
+      flex: none;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      background: rgba(255,255,255,.92);
+      color: var(--twilight-indigo);
+      font-size: 0.92rem;
+      white-space: nowrap;
+    }
+    .page-title {
+      margin: 0;
+      font-size: clamp(1.9rem, 4.5vw, 3rem);
+      letter-spacing: -0.04em;
+      line-height: 1.06;
+    }
+    .page-subtitle {
+      margin: 10px 0 0;
+      max-width: 64ch;
+      color: var(--muted);
+    }
+    .section { margin-top: 22px; }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+    .profile-grid {
+      display: grid;
+      gap: 14px;
+    }
+    .profile-card, .settings-card, .account-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .profile-header {
+      display: grid;
+      gap: 14px;
+      align-items: center;
+    }
+    .avatar {
+      width: 84px;
+      height: 84px;
+      border-radius: 28px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--twilight-indigo), var(--rich-cerulean));
+      color: var(--white);
+      font-size: 1.8rem;
+      font-weight: 800;
+      box-shadow: var(--shadow);
+    }
+    .avatar-info h3 {
+      margin: 0 0 6px;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+    }
+    .avatar-info p {
+      margin: 0;
+      color: var(--muted);
+    }
+    .info-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .info {
+      padding: 14px;
+      border-radius: 18px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+    }
+    .info span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+    }
+    .info strong {
+      display: block;
+      color: var(--shadow-grey);
+      font-size: 1rem;
+    }
+    .field {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .field label {
+      font-weight: 700;
+      color: var(--twilight-indigo);
+      font-size: 0.92rem;
+    }
+    .field input, .field select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px 16px;
+      background: var(--soft);
+      color: var(--ink);
+    }
+    .switch-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .switch-row:last-child { border-bottom: 0; }
+    .switch-row strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+    .switch-row p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .toggle {
+      appearance: none;
+      width: 48px;
+      height: 30px;
+      border-radius: 999px;
+      background: #d9e1e7;
+      position: relative;
+      outline: none;
+      cursor: pointer;
+      flex: none;
+      transition: background 0.18s ease;
+    }
+    .toggle::after {
+      content: "";
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      top: 3px;
+      left: 3px;
+      background: var(--white);
+      box-shadow: 0 4px 10px rgba(22, 25, 37, 0.18);
+      transition: transform 0.18s ease;
+    }
+    .toggle:checked {
+      background: var(--rich-cerulean);
+    }
+    .toggle:checked::after {
+      transform: translateX(18px);
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 0;
+      border-radius: 16px;
+      padding: 14px 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+    .button:hover { transform: translateY(-1px); }
+    .button.primary { background: var(--deep-pink); color: var(--white); box-shadow: 0 14px 25px rgba(255, 87, 159, 0.26); }
+    .button.ghost { background: var(--soft); color: var(--shadow-grey); border: 1px solid var(--line); }
+    .button.block { width: 100%; }
+    .actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .save-status {
+      display: none;
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(187, 223, 197, 0.24);
+      color: var(--shadow-grey);
+      border: 1px solid rgba(187, 223, 197, 0.5);
+    }
+    .bottom-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 50;
+      background: rgba(255,255,255,.94);
+      border-top: 1px solid var(--line);
+      backdrop-filter: blur(18px);
+      padding: 10px 14px max(10px, env(safe-area-inset-bottom));
+    }
+    .bottom-nav-inner {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .bottom-nav a {
+      display: grid;
+      place-items: center;
+      gap: 4px;
+      padding: 10px 8px;
+      border-radius: 18px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .bottom-nav a span { font-size: 1.1rem; line-height: 1; }
+    .bottom-nav a.active { background: rgba(64, 110, 142, 0.12); color: var(--twilight-indigo); }
+    @media (min-width: 720px) {
+      .app { padding: 24px 24px 104px; }
+      .profile-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .profile-card { grid-column: 1 / -1; }
+      .profile-header {
+        grid-template-columns: auto 1fr;
+      }
+      .actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <div class="container">
+      <header class="topbar">
+        <a class="brand" href="index.html" aria-label="หน้าแรก Happy Pulse">
+          <span class="brand-mark">HP</span>
+          <span>Happy Pulse</span>
+        </a>
+        <div class="status-pill">โปรไฟล์และการตั้งค่า</div>
+      </header>
+
+      <section aria-label="บทนำหน้าโปรไฟล์">
+        <h1 class="page-title">จัดการข้อมูลส่วนตัวและความชอบของคุณได้ง่าย ๆ</h1>
+        <p class="page-subtitle">อัปเดตโปรไฟล์ ควบคุมการแจ้งเตือน และตรวจสอบข้อมูลติดต่อที่ใช้สำหรับการจองและการแจ้งเตือนติดตามผล</p>
+      </section>
+
+      <section class="section" aria-labelledby="profile-title">
+        <div class="section-head">
+          <h2 id="profile-title">ข้อมูลผู้ใช้</h2>
+          <a href="my-records.html">เปิดบันทึก</a>
+        </div>
+        <div class="profile-grid">
+          <article class="profile-card">
+            <div class="profile-header">
+              <div class="avatar" aria-hidden="true">AP</div>
+              <div class="avatar-info">
+                <h3>Alex Parker</h3>
+                <p>alex.parker@example.com</p>
+                <p>เป็นสมาชิกตั้งแต่ปี 2024</p>
+              </div>
+            </div>
+            <div class="info-grid">
+              <div class="info"><span>เบอร์โทร</span><strong>+66 81 234 5678</strong></div>
+              <div class="info"><span>สาขาที่เลือก</span><strong>Central Clinic</strong></div>
+              <div class="info"><span>แพ็กเกจหลัก</span><strong>Signature Care</strong></div>
+            </div>
+            <div class="actions">
+              <a class="button primary" href="booking.html">จองอีกครั้ง</a>
+              <a class="button ghost" href="packages.html">เปลี่ยนแพ็กเกจ</a>
+            </div>
+          </article>
+
+          <article class="settings-card">
+            <h2 class="section-head" style="margin:0 0 8px;"><span>การตั้งค่า</span></h2>
+            <div class="switch-row">
+              <div>
+                <strong>แจ้งเตือนทางอีเมล</strong>
+                <p>รับการแจ้งเตือนนัดหมายและติดตามผลทางอีเมล</p>
+              </div>
+              <input class="toggle" type="checkbox" checked aria-label="แจ้งเตือนทางอีเมล" />
+            </div>
+            <div class="switch-row">
+              <div>
+                <strong>แจ้งเตือนทาง SMS</strong>
+                <p>รับการแจ้งเตือนการจองผ่านโทรศัพท์ของคุณ</p>
+              </div>
+              <input class="toggle" type="checkbox" checked aria-label="แจ้งเตือนทาง SMS" />
+            </div>
+            <div class="switch-row">
+              <div>
+                <strong>โน้ตสุขภาพส่วนตัว</strong>
+                <p>เก็บบันทึกสำคัญให้มองเห็นได้เฉพาะในประวัติของคุณ</p>
+              </div>
+              <input class="toggle" type="checkbox" aria-label="โน้ตสุขภาพส่วนตัว" />
+            </div>
+            <div class="switch-row">
+              <div>
+                <strong>สรุปรายสัปดาห์</strong>
+                <p>รับสรุปการดูแลแบบสั้น ๆ ทุกสัปดาห์</p>
+              </div>
+              <input class="toggle" type="checkbox" checked aria-label="สรุปรายสัปดาห์" />
+            </div>
+          </article>
+
+          <article class="account-card">
+            <h2 class="section-head" style="margin:0 0 8px;"><span>รายละเอียดบัญชี</span></h2>
+            <div class="field">
+              <label for="displayName">ชื่อที่แสดง</label>
+              <input id="displayName" type="text" value="Alex Parker" />
+            </div>
+            <div class="field">
+              <label for="email">อีเมล</label>
+              <input id="email" type="email" value="alex.parker@example.com" />
+            </div>
+            <div class="field">
+              <label for="language">ภาษา</label>
+              <select id="language">
+                <option selected>ไทย</option>
+                <option>English</option>
+              </select>
+            </div>
+            <div class="actions">
+              <button id="saveButton" class="button primary" type="button">บันทึกการเปลี่ยนแปลง</button>
+              <a class="button ghost" href="index.html">กลับหน้าแรก</a>
+            </div>
+            <div id="saveStatus" class="save-status" role="status" aria-live="polite"></div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <nav class="bottom-nav" aria-label="แถบนำทางด้านล่าง">
+    <div class="bottom-nav-inner">
+      <a href="index.html"><span>⌂</span>หน้าแรก</a>
+      <a href="packages.html"><span>◫</span>แพ็กเกจ</a>
+      <a href="booking.html"><span>◴</span>การจอง</a>
+      <a class="active" href="profile.html"><span>◌</span>โปรไฟล์</a>
+    </div>
+  </nav>
+
+  <script>
+    const saveButton = document.getElementById('saveButton');
+    const saveStatus = document.getElementById('saveStatus');
+
+    saveButton.addEventListener('click', () => {
+      saveStatus.style.display = 'block';
+      saveStatus.textContent = 'บันทึกโปรไฟล์เรียบร้อยแล้ว ระบบอัปเดตความชอบของคุณแล้ว';
+    });
+  </script>
+</body>
+</html>

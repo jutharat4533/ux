@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Pulse - ระบบออกแบบ</title>
+  <link rel="stylesheet" href="common.css" />
+  <style>
+    .hero {
+      background: linear-gradient(145deg, var(--twilight-indigo), var(--rich-cerulean));
+      color: var(--white);
+      border-radius: 30px;
+      padding: 28px 20px 22px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -60px -80px auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      max-width: 12ch;
+    }
+
+    .hero p {
+      margin: 14px 0 0;
+      max-width: 62ch;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--celadon);
+      font-size: 0.84rem;
+      letter-spacing: 0.02em;
+      margin-bottom: 16px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .panel {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .panel h2 {
+      margin: 0 0 12px;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+
+    .swatch-grid, .type-grid, .component-grid, .token-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .swatch {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--white);
+    }
+
+    .swatch-color {
+      min-height: 94px;
+    }
+
+    .swatch-body {
+      padding: 14px;
+      display: grid;
+      gap: 4px;
+    }
+
+    .swatch-body strong {
+      font-size: 0.98rem;
+      color: var(--shadow-grey);
+    }
+
+    .swatch-body span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .type-sample h1,
+    .type-sample h2,
+    .type-sample p {
+      margin: 0;
+    }
+
+    .type-sample {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: var(--soft);
+    }
+
+    .type-sample small {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .sample-h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+    }
+
+    .sample-h2 {
+      font-size: 1.4rem;
+      letter-spacing: -0.03em;
+    }
+
+    .sample-body {
+      color: var(--ink);
+    }
+
+    .sample-label {
+      font-size: 0.86rem;
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .sample-card {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 16px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .sample-card p {
+      margin: 8px 0 0;
+      color: var(--muted);
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field label {
+      font-weight: 700;
+      color: var(--twilight-indigo);
+      font-size: 0.92rem;
+    }
+
+    .field input, .field select, .field textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px 16px;
+      background: var(--soft);
+      color: var(--ink);
+    }
+
+    .token-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .token-chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--soft);
+      color: var(--twilight-indigo);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .nav-demo {
+      padding: 14px;
+      border-radius: 20px;
+      background: rgba(246, 249, 251, 0.8);
+      border: 1px solid var(--line);
+    }
+
+    .mini-nav {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .mini-nav span {
+      display: grid;
+      place-items: center;
+      gap: 4px;
+      padding: 10px 8px;
+      border-radius: 18px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    @media (min-width: 720px) {
+      .section-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .section-grid .panel:first-child,
+      .section-grid .panel:nth-child(4),
+      .section-grid .panel:nth-child(5) {
+        grid-column: 1 / -1;
+      }
+      .swatch-grid,
+      .type-grid,
+      .component-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .token-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .swatch-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+      .type-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      .component-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <div class="container">
+      <header class="topbar">
+        <a class="brand" href="index.html" aria-label="หน้าแรก Happy Pulse">
+          <span class="brand-mark">HP</span>
+          <span>Happy Pulse</span>
+        </a>
+        <div class="status-pill">หน้าระบบออกแบบ</div>
+      </header>
+
+      <section class="hero" aria-label="บทนำระบบออกแบบ">
+        <span class="hero-eyebrow">ระบบออกแบบ</span>
+        <h1>คู่มือสไตล์และคอมโพเนนต์ของ Happy Pulse</h1>
+        <p>หน้ารวมโทเคน สี ตัวอักษร ปุ่ม การ์ด ฟอร์ม และรูปแบบการนำทางที่ใช้ร่วมกันในทุกหน้า เพื่อให้การพัฒนาและขยายต่อทำได้สม่ำเสมอ</p>
+        <div class="hero-actions">
+          <a class="button primary" href="index.html">กลับหน้าแรก</a>
+          <a class="button secondary" href="packages.html">ดูตัวอย่างการใช้งาน</a>
+        </div>
+      </section>
+
+      <section class="section-grid" aria-label="องค์ประกอบระบบออกแบบ">
+        <article class="panel">
+          <h2>ระบบสี</h2>
+          <div class="swatch-grid">
+            <div class="swatch">
+              <div class="swatch-color" style="background:#161925"></div>
+              <div class="swatch-body"><strong>Shadow Grey</strong><span>#161925</span></div>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#23395B"></div>
+              <div class="swatch-body"><strong>Twilight Indigo</strong><span>#23395B</span></div>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#406E8E"></div>
+              <div class="swatch-body"><strong>Rich Cerulean</strong><span>#406E8E</span></div>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#BBDFC5"></div>
+              <div class="swatch-body"><strong>Celadon</strong><span>#BBDFC5</span></div>
+            </div>
+            <div class="swatch">
+              <div class="swatch-color" style="background:#FF579F"></div>
+              <div class="swatch-body"><strong>Deep Pink</strong><span>#FF579F</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <h2>ตัวอักษร</h2>
+          <div class="type-grid">
+            <div class="type-sample">
+              <small>Heading 1</small>
+              <div class="sample-h1">จองง่าย ดูแลดี</div>
+            </div>
+            <div class="type-sample">
+              <small>Heading 2</small>
+              <div class="sample-h2">หัวข้อเนื้อหา</div>
+            </div>
+            <div class="type-sample">
+              <small>Body</small>
+              <p class="sample-body">ข้อความอ่านง่าย ใช้สำหรับอธิบายข้อมูลและขั้นตอนต่าง ๆ ภายในระบบ</p>
+            </div>
+            <div class="type-sample">
+              <small>Label</small>
+              <div class="sample-label">LABEL / CAPS</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <h2>ปุ่ม</h2>
+          <div class="component-grid">
+            <div class="sample-card">
+              <strong>Primary</strong>
+              <p>ใช้กับการกระทำหลัก เช่น จอง ยืนยัน หรือบันทึก</p>
+              <div class="token-row" style="margin-top: 12px;">
+                <a class="button primary" href="booking.html">จองเลย</a>
+              </div>
+            </div>
+            <div class="sample-card">
+              <strong>Secondary</strong>
+              <p>ใช้กับทางเลือกเสริมที่ต้องการน้ำหนักน้อยกว่า</p>
+              <div class="token-row" style="margin-top: 12px;">
+                <a class="button secondary" href="packages.html">ดูแพ็กเกจ</a>
+              </div>
+            </div>
+            <div class="sample-card">
+              <strong>Ghost</strong>
+              <p>เหมาะสำหรับลิงก์รองหรือการไปยังหน้าก่อนหน้า</p>
+              <div class="token-row" style="margin-top: 12px;">
+                <a class="button ghost" href="profile.html">กลับโปรไฟล์</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <h2>การ์ดและฟอร์ม</h2>
+          <div class="component-grid">
+            <div class="sample-card">
+              <strong>Card</strong>
+              <p>มุมโค้ง 22px, ขอบบาง, เงานุ่ม ใช้กับข้อมูลสรุปและแพ็กเกจ</p>
+            </div>
+            <div class="sample-card">
+              <strong>Input</strong>
+              <div class="field" style="margin-top: 12px;">
+                <label for="demo-input">ตัวอย่างช่องกรอก</label>
+                <input id="demo-input" type="text" value="ข้อมูลตัวอย่าง" />
+              </div>
+            </div>
+            <div class="sample-card">
+              <strong>Navigation</strong>
+              <p>Bottom nav ใช้ 4 หมวดหลัก: หน้าแรก, แพ็กเกจ, การจอง, โปรไฟล์</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <h2>โทเคนดีไซน์</h2>
+          <div class="token-grid">
+            <div class="sample-card">
+              <strong>Spacing</strong>
+              <div class="token-row" style="margin-top: 12px;">
+                <span class="token-chip">8</span>
+                <span class="token-chip">12</span>
+                <span class="token-chip">16</span>
+                <span class="token-chip">18</span>
+                <span class="token-chip">22</span>
+              </div>
+            </div>
+            <div class="sample-card">
+              <strong>Radius & Shadow</strong>
+              <div class="token-row" style="margin-top: 12px;">
+                <span class="token-chip">22px</span>
+                <span class="token-chip">soft shadow</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <h2>ตัวอย่างแถบนำทางด้านล่าง</h2>
+          <div class="nav-demo">
+            <p style="margin:0; color:var(--muted);">รูปแบบนำทางล่างที่ใช้ในทุกหน้าหลัก</p>
+            <div class="mini-nav" aria-hidden="true">
+              <span>⌂<br />หน้าแรก</span>
+              <span>◫<br />แพ็กเกจ</span>
+              <span>◴<br />การจอง</span>
+              <span>◌<br />โปรไฟล์</span>
+            </div>
+          </div>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <nav class="bottom-nav" aria-label="แถบนำทางด้านล่าง">
+    <div class="bottom-nav-inner">
+      <a href="index.html"><span>⌂</span>หน้าแรก</a>
+      <a href="packages.html"><span>◫</span>แพ็กเกจ</a>
+      <a href="booking.html"><span>◴</span>การจอง</a>
+      <a href="profile.html"><span>◌</span>โปรไฟล์</a>
+    </div>
+  </nav>
+</body>
+</html>
